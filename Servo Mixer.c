@@ -1,7 +1,8 @@
 #include<15.h>
 
 // Servo Fast mixer
-// STC15 working on 30.000 Mhz
+// RolandChen 2016.1
+// works on STC15 MCU@30.000 Mhz
 
 int ta=0,tb=0,ia=0,ib=0;
 int oa=0,ob=0;
