@@ -1,7 +1,8 @@
 #include<15.h>
-//#include <intrins.h>
+
 // Servo Fast mixer
-//STC15 working on 30.000 Mhz
+// STC15 working on 30.000 Mhz
+
 int ta=0,tb=0,ia=0,ib=0;
 int oa=0,ob=0;
 unsigned int t_20ms=0;
@@ -28,44 +29,38 @@ void Timer0Init(void)  //interrupt 1 on 10us
 }
 
 
-
-
 void timer0(void) interrupt 1 
 {
 	//input counting part
-	//regardless of input freq.  once input is 0 reset the counter
+	//regardless of input freq.  once input is 0 it resets the counter
 	
 	if(P32==1)ta++;
-	
-	else if(ta!=0 && P32==0) {ia=ta;ta=0;}     //a: elevator          //ia,ib is the counted exact input.
+	else if (ta!=0 && P32==0) {ia=ta;ta=0;}    //a: elevator          //ia,ib is the counted exact input.
 
-  if(P33==1)tb++;
+  	if(P33==1)tb++;
+  	else if (tb!=0 && P33==0) {ib=tb;tb=0;}    //b: aileron
 
-  else if (tb!=0 && P33==0) {ib=tb;tb=0;}     //b: aileron
-
-  t_20ms++;
-  if (t_20ms==2000)
+  	t_20ms++;
+  	if (t_20ms==2000)
 	{
 		t_20ms=0;
 		if(ia>=100 && ib>=100 &&ia<=220 && ib<=220)
 		{
-		oa=((ia-150)/2) +((ib-150)/2)+150;  
-	  ob=((ia-150)/2) -((ib-150)/2)+150;
+			oa=((ia-150)/2) + ((ib-150)/2)+150;  
+	  		ob=((ia-150)/2) - ((ib-150)/2)+150;
 		}
 		else{oa=0;ob=0;}
 	}
 
-  //output counting part. also regardless of frequency.
+  	//output counting part. also regardless of frequency.
   
-		if(t_20ms<oa)P34=1;
-		else P34=0;
+	if(t_20ms<oa)P34=1;
+	else P34=0;
 		
-		if(t_20ms<ob)P35=1;
-		else P35=0;
-	
+	if(t_20ms<ob)P35=1;
+	else P35=0;
 
 }
-
 
 
 void main()
@@ -74,7 +69,7 @@ void main()
 	for(;;)
 	{
           //nothing to do in the main loop.
-		  //All the code has been put in the interrupt of timer0
+          //All the code has been put in the interrupt of timer0
 	}
 }
 
