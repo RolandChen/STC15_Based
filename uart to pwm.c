@@ -59,10 +59,10 @@ void timer0(void) interrupt 1
 		if(t_20ms<oa)P33=1;
 		else P33=0;
 		
-	  if(t_20ms<ob)P34=1;
+	        if(t_20ms<ob)P34=1;
 		else P34=0;
 		
-	  if(t_20ms<oc)P35=1;
+	        if(t_20ms<oc)P35=1;
 		else P35=0;
 
 		if(t_20ms<od)P36=1;
@@ -84,7 +84,8 @@ void main()
 			tcount=0;
 			switch(rx)
 			{ 
-				// oa: A  ob:E  oc:sw7  od:sw8
+				// oa: ch1  ob:ch2  oc:sw7  od:sw8
+				//on apm/pixhawk channel ELE needs reverse.
 				case 1:oa=150;ob=150;oc=100;od=100;break;
 				case 2:oa=140;ob=150;oc=100;od=100;break;
 				case 3:oa=160;ob=150;oc=100;od=100;break;
@@ -116,11 +117,11 @@ void isr_uart(void) interrupt 4
 {
     if(RI)
     {
-        RI = 0;      //清除接收标志位 
+        RI = 0;     
         rx = SBUF;
-		    ES = 0;
-		    rxc = 1;
-	  }
+	ES = 0;
+	rxc = 1;
+    }
 }
 
 
