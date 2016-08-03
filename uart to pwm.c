@@ -44,29 +44,29 @@ void UartInit(void)		//2400bps@30.000MHz
 void timer0(void) interrupt 1 
 {
 
-  t_20ms++;
-  if (t_20ms>=2000)
+	t_20ms++;
+	if (t_20ms>=2000)
 	{
 		t_20ms=0;//Add func:more than 3.xs no signal==>(150,150,100,100)
 		tcount++;
-	}
-  if(tcount>=200)
-	{
+  	}
+  	if(tcount>=200)
+  	{
 		tcount=0;
 		oa=150;ob=150;oc=100;od=100;
-	}
+  	}
 	
-		if(t_20ms<oa)P33=1;
-		else P33=0;
+	if(t_20ms<oa)P33=1;
+  	else P33=0;
+	
+	if(t_20ms<ob)P34=1;
+	else P34=0;
 		
-	        if(t_20ms<ob)P34=1;
-		else P34=0;
-		
-	        if(t_20ms<oc)P35=1;
-		else P35=0;
+	if(t_20ms<oc)P35=1;
+	else P35=0;
 
-		if(t_20ms<od)P36=1;
-		else P36=0;
+	if(t_20ms<od)P36=1;
+	else P36=0;
 }
 
 
