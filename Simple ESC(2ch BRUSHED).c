@@ -32,11 +32,11 @@ void timer0(void) interrupt 1
 	if(IN_1==1){ta++;flag1=1;}
 	else if(ta!=0 && IN_1==0) {ia=ta;ta=0;}     
   
-  if(IN_2==1){tb++;flag2=1;}
-  else if (tb!=0 && IN_2==0) {ib=tb;tb=0;}     
+ 	if(IN_2==1){tb++;flag2=1;}
+	else if (tb!=0 && IN_2==0) {ib=tb;tb=0;}     
 
-  t_20ms++;
-  if (t_20ms==2000)
+  	t_20ms++;
+ 	if (t_20ms==2000)
 	{
 		t_20ms=0;
 		if(flag1==0)oa=ia=0;
@@ -53,9 +53,9 @@ void timer0(void) interrupt 1
 		else{oa=0;ob=0;}
 	}
 
-  //output counting part. also regardless of frequency.
+ 	 //output counting part. also regardless of frequency.
   
-  if(t_20ms<oa)OUT_1=1;
+  	if(t_20ms<oa)OUT_1=1;
 	else OUT_1=0;
 		
 	if(t_20ms<ob)OUT_2=1;
@@ -72,7 +72,7 @@ void main()
 	Timer0Init();
 	for(;;)
 	{
-      //nothing to do in the main loop.
+      		  //nothing to do in the main loop.
 		  //All the code has been put in the interrupt of timer0
 	}
 }
